@@ -40,6 +40,9 @@
       "implicitDependencies": [
         "demo"
       ]
+    },
+    "ngx-input-deeplinking": {
+      "tags": []
     }
   }
 }

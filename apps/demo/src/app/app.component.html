@@ -1,6 +1,13 @@
-<h1>Bookings</h1>
-<a routerLink="bookings/1">Booking 1</a>
-<br>
-<a routerLink="bookings/2">Booking 2</a>
+<h1>Routes</h1>
+<ol>
+  <li>
+    <h3>Simple path parameter</h3>
+    <a [routerLink]="'example/1'">example/1</a>
+  </li>
+  <li>
+    <h3>Path parameter and query parameter</h3>
+    <a [routerLink]="'example/2'" [queryParams]="{queryParam: 'secondLink'}">example/2?queryParams=secondLink</a>
+  </li>
+</ol>
 
 <router-outlet></router-outlet>

@@ -127,6 +127,50 @@
           }
         }
       }
+    },
+    "ngx-input-deeplinking": {
+      "projectType": "library",
+      "root": "libs/ngx-input-deeplinking",
+      "sourceRoot": "libs/ngx-input-deeplinking/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/ngx-input-deeplinking"
+          ],
+          "options": {
+            "project": "libs/ngx-input-deeplinking/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngx-input-deeplinking/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/ngx-input-deeplinking/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ngx-input-deeplinking"
+          ],
+          "options": {
+            "jestConfig": "libs/ngx-input-deeplinking/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ngx-input-deeplinking/src/**/*.ts",
+              "libs/ngx-input-deeplinking/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
