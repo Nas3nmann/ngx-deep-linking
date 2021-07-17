@@ -1,5 +1,5 @@
 import {RouterInputWrapperComponent} from './router-input-wrapper.component';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Route, Router} from '@angular/router';
 import {Component, Input, ViewContainerRef} from '@angular/core';
 import {RouterInputWrapperConfig} from './router-input-wrapper-config.model';
 import {Subject} from 'rxjs';
@@ -8,8 +8,28 @@ import {Subject} from 'rxjs';
   template: ''
 })
 class TestComponent {
-  @Input() testPathParam!: string;
-  @Input() testQueryParam!: string;
+
+  private _testPathParam!: string;
+
+  @Input()
+  get testPathParam(): string {
+    return this._testPathParam;
+  }
+
+  set testPathParam(value: string) {
+    this._testPathParam = value;
+  }
+
+  private _testQueryParam!: string;
+
+  @Input()
+  get testQueryParam(): string {
+    return this._testQueryParam;
+  }
+
+  set testQueryParam(value: string) {
+    this._testQueryParam = value;
+  }
 }
 
 describe('RouterInputWrapperComponent', () => {
@@ -19,6 +39,7 @@ describe('RouterInputWrapperComponent', () => {
   let wrappedComponent: TestComponent;
 
   let activatedRouteMock: any;
+  let routerMock: any;
   let paramChanges = new Subject<Params>();
   let queryParamChanges = new Subject<Params>();
 
@@ -36,6 +57,14 @@ describe('RouterInputWrapperComponent', () => {
     ]
   }
 
+  let testRoute: Route = {
+    path: 'test/:testPathParam',
+    component: RouterInputWrapperComponent,
+    data: {
+      ngxInputDeeplinkingConfig: testConfig
+    }
+  };
+
   beforeEach(() => {
     const activatedRouteSnapshotMock = {
       data: {
@@ -52,7 +81,12 @@ describe('RouterInputWrapperComponent', () => {
     activatedRouteMock = {
       snapshot: activatedRouteSnapshotMock,
       params: paramChanges,
-      queryParams: queryParamChanges
+      queryParams: queryParamChanges,
+      routeConfig: testRoute
+    };
+
+    routerMock = {
+      navigateByUrl: jest.fn()
     };
 
     componentFactoryMock = {};
@@ -70,6 +104,7 @@ describe('RouterInputWrapperComponent', () => {
 
     routerInputWrapperComponent = new RouterInputWrapperComponent(
       activatedRouteMock as unknown as ActivatedRoute,
+      routerMock as unknown as Router,
       componentFactoryResolverMock,
       viewContainerRefMock as unknown as ViewContainerRef
     );
@@ -97,6 +132,14 @@ describe('RouterInputWrapperComponent', () => {
       expect(wrappedComponent.testPathParam).toBe('changedPathParam');
     });
 
+    it('should not do anything if input and change are equal', () => {
+      const setterSpy = jest.spyOn(wrappedComponent, 'testPathParam', 'set');
+      paramChanges.next({testPathParam: 'initialPathParam'});
+
+      expect(wrappedComponent.testPathParam).toBe('initialPathParam');
+      expect(setterSpy).not.toHaveBeenCalled();
+    });
+
     it('should not be used for syncing any more after destroy', () => {
       routerInputWrapperComponent.ngOnDestroy();
 
@@ -111,10 +154,18 @@ describe('RouterInputWrapperComponent', () => {
       expect(wrappedComponent.testQueryParam).toBe('initialQueryParam');
     });
 
-    it('should be used to sync component inputs', () => {
+    it('should be used to sync component inputs on changes', () => {
       queryParamChanges.next({testQueryParam: 'changedQueryParam'});
 
       expect(wrappedComponent.testQueryParam).toBe('changedQueryParam');
+    });
+
+    it('should not do anything if input and change are equal', () => {
+      const setterSpy = jest.spyOn(wrappedComponent, 'testQueryParam', 'set');
+      queryParamChanges.next({testQueryParam: 'initialQueryParam'});
+
+      expect(wrappedComponent.testQueryParam).toBe('initialQueryParam');
+      expect(setterSpy).not.toHaveBeenCalled();
     });
 
     it('should not be used for syncing any more after destroy', () => {
