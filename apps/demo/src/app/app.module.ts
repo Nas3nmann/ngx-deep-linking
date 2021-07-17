@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {ExampleComponent} from './example/example.component';
 import {Route, RouterModule} from '@angular/router';
 import {NgxInputDeeplinkingModule, RouterInputWrapperComponent} from '@jdrks/ngx-input-deeplinking';
+import {FormsModule} from '@angular/forms';
 
 const routes: Route[] = [
   {
@@ -26,7 +27,7 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [AppComponent, ExampleComponent],
-  imports: [BrowserModule, NgxInputDeeplinkingModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, NgxInputDeeplinkingModule, RouterModule.forRoot(routes), FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
