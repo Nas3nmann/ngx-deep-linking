@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/libs/ngx-input-deeplinking",
+  "dest": "../../dist/libs/ngx-deep-linking",
   "lib": {
     "entryFile": "src/index.ts"
   }

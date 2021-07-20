@@ -20,6 +20,10 @@ import {ReplaySubject} from 'rxjs';
 export class BookListComponent implements OnInit, OnDestroy {
   books = new MatTableDataSource(BOOKS);
   columnsToDisplay = ['author', 'title'];
+  @Output()
+  searchStringChange: ReplaySubject<string> = new ReplaySubject<string>();
+  @Output()
+  private selectedBookIdChange: EventEmitter<number> = new EventEmitter<number>();
 
   private _selectedBook: Book | undefined;
 
@@ -41,9 +45,6 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.selectedBook = this.books.data.find(book => book.id === bookId);
   }
 
-  @Output()
-  private selectedBookIdChange: EventEmitter<number> = new EventEmitter<number>();
-
   private _searchString: string = '';
 
   @Input()
@@ -55,9 +56,6 @@ export class BookListComponent implements OnInit, OnDestroy {
     this._searchString = value;
     this.searchStringChange.next(value);
   }
-
-  @Output()
-  searchStringChange: ReplaySubject<string> = new ReplaySubject<string>();
 
   ngOnInit(): void {
     this.searchStringChange

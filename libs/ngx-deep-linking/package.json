@@ -1,5 +1,5 @@
 {
-  "name": "@jdrks/ngx-input-deeplinking",
+  "name": "@jdrks/ngx-deep-linking",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^12.1.1",

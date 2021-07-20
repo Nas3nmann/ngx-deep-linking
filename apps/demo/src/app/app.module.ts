@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {Route, RouterModule} from '@angular/router';
-import {NgxInputDeeplinkingModule, RouterInputWrapperComponent} from '@jdrks/ngx-input-deeplinking';
+import {DeepLinkingWrapperComponent, NgxDeepLinkingModule,} from '@jdrks/ngx-deep-linking';
 import {FormsModule} from '@angular/forms';
 import {BookListComponent} from './book-list/book-list.component';
 import {MatTableModule} from '@angular/material/table';
@@ -15,48 +15,40 @@ import {MatInputModule} from '@angular/material/input';
 const routes: Route[] = [
   {
     path: 'books/:selectedBookId',
-    component: RouterInputWrapperComponent,
+    component: DeepLinkingWrapperComponent,
     data: {
-      ngxInputDeeplinkingConfig: {
+      ngxDeepLinkingConfig: {
         component: BookListComponent,
-        params: [
-          'selectedBookId'
-        ],
-        queryParams: [
-          'searchString'
-        ]
-      }
+        params: ['selectedBookId'],
+        queryParams: ['searchString'],
+      },
     },
-    children: [{
-      path: 'content',
-      component: BookContentComponent
-    }]
+    children: [
+      {
+        path: 'content',
+        component: BookContentComponent,
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: '/books/'
-  }
+    redirectTo: '/books/',
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BookListComponent,
-    BookContentComponent
-  ],
+  declarations: [AppComponent, BookListComponent, BookContentComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgxInputDeeplinkingModule,
+    NgxDeepLinkingModule,
     RouterModule.forRoot(routes),
     FormsModule,
     MatTableModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
   ],
-  bootstrap: [
-    AppComponent
-  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

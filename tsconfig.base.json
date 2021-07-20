@@ -18,8 +18,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@jdrks/ngx-input-deeplinking": [
-        "libs/ngx-input-deeplinking/src/index.ts"
+      "@jdrks/ngx-deep-linking": [
+        "libs/ngx-deep-linking/src/index.ts"
       ]
     }
   },

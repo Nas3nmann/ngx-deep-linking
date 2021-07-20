@@ -41,7 +41,7 @@
         "demo"
       ]
     },
-    "ngx-input-deeplinking": {
+    "ngx-deep-linking": {
       "tags": []
     }
   }

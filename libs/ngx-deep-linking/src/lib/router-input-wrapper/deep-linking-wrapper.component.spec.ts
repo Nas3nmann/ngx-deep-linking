@@ -1,14 +1,13 @@
-import {RouterInputWrapperComponent} from './router-input-wrapper.component';
+import {DeepLinkingWrapperComponent} from './deep-linking-wrapper.component';
 import {ActivatedRoute, Params, Route, Router} from '@angular/router';
 import {Component, Input, ViewContainerRef} from '@angular/core';
-import {RouterInputWrapperConfig} from './router-input-wrapper-config.model';
+import {DeepLinkingWrapperConfig} from './deep-linking-wrapper-config.model';
 import {Subject} from 'rxjs';
 
 @Component({
-  template: ''
+  template: '',
 })
 class TestComponent {
-
   private _testPathParam!: string;
 
   @Input()
@@ -33,8 +32,7 @@ class TestComponent {
 }
 
 describe('RouterInputWrapperComponent', () => {
-
-  let routerInputWrapperComponent: RouterInputWrapperComponent;
+  let routerInputWrapperComponent: DeepLinkingWrapperComponent;
 
   let wrappedComponent: TestComponent;
 
@@ -47,62 +45,58 @@ describe('RouterInputWrapperComponent', () => {
   let componentFactoryMock: any;
   let viewContainerRefMock: any;
 
-  const testConfig: RouterInputWrapperConfig = {
+  const testConfig: DeepLinkingWrapperConfig = {
     component: TestComponent,
-    params: [
-      'testPathParam'
-    ],
-    queryParams: [
-      'testQueryParam'
-    ]
-  }
+    params: ['testPathParam'],
+    queryParams: ['testQueryParam'],
+  };
 
   let testRoute: Route = {
     path: 'test/:testPathParam',
-    component: RouterInputWrapperComponent,
+    component: DeepLinkingWrapperComponent,
     data: {
-      ngxInputDeeplinkingConfig: testConfig
-    }
+      ngxDeepLinkingConfig: testConfig,
+    },
   };
 
   beforeEach(() => {
     const activatedRouteSnapshotMock = {
       data: {
-        ngxInputDeeplinkingConfig: testConfig
+        ngxDeepLinkingConfig: testConfig,
       },
       params: {
-        testPathParam: 'initialPathParam'
+        testPathParam: 'initialPathParam',
       },
       queryParams: {
-        testQueryParam: 'initialQueryParam'
-      }
-    }
+        testQueryParam: 'initialQueryParam',
+      },
+    };
 
     activatedRouteMock = {
       snapshot: activatedRouteSnapshotMock,
       params: paramChanges,
       queryParams: queryParamChanges,
-      routeConfig: testRoute
+      routeConfig: testRoute,
     };
 
     routerMock = {
-      navigateByUrl: jest.fn()
+      navigateByUrl: jest.fn(),
     };
 
     componentFactoryMock = {};
     componentFactoryResolverMock = {
-      resolveComponentFactory: jest.fn().mockReturnValue(componentFactoryMock)
+      resolveComponentFactory: jest.fn().mockReturnValue(componentFactoryMock),
     };
 
     wrappedComponent = new TestComponent();
     viewContainerRefMock = {
       clear: jest.fn(),
       createComponent: jest.fn().mockReturnValue({
-        instance: wrappedComponent
-      })
-    }
+        instance: wrappedComponent,
+      }),
+    };
 
-    routerInputWrapperComponent = new RouterInputWrapperComponent(
+    routerInputWrapperComponent = new DeepLinkingWrapperComponent(
       activatedRouteMock as unknown as ActivatedRoute,
       routerMock as unknown as Router,
       componentFactoryResolverMock,
@@ -117,8 +111,12 @@ describe('RouterInputWrapperComponent', () => {
   });
 
   it('should render the wrapped component', () => {
-    expect(componentFactoryResolverMock.resolveComponentFactory).toHaveBeenCalledWith(TestComponent);
-    expect(viewContainerRefMock.createComponent).toHaveBeenCalledWith(componentFactoryMock);
+    expect(
+      componentFactoryResolverMock.resolveComponentFactory
+    ).toHaveBeenCalledWith(TestComponent);
+    expect(viewContainerRefMock.createComponent).toHaveBeenCalledWith(
+      componentFactoryMock
+    );
   });
 
   describe('Path params', () => {

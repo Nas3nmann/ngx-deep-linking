@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'ngx-input-deeplinking',
+  displayName: 'ngx-deep-linking',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/ngx-input-deeplinking',
+  coverageDirectory: '../../coverage/libs/ngx-deep-linking',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

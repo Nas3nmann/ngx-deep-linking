@@ -1,2 +1,3 @@
-# ngx-input-deep-linking
+# ngx-deep-linking
+
 A library for automatically deep linking 
