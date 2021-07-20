@@ -73,7 +73,7 @@ export class RouterInputWrapperComponent implements OnInit, OnDestroy {
 
   private populateInputsFromParams(componentInstance: any, inputNames: string[], params: Params) {
     for (let inputName of inputNames) {
-      if (String(componentInstance[inputName]) !== params[inputName]) {
+      if (this.paramToString(componentInstance[inputName]) !== params[inputName]) {
         componentInstance[inputName] = params[inputName];
       }
     }
@@ -99,7 +99,7 @@ export class RouterInputWrapperComponent implements OnInit, OnDestroy {
               .filter(paths => !!paths)
               .join('/');
 
-            const newUrl = replaceUrlPathParam(urlWithoutParams, pathDefinition, pathParamName, String(newValue));
+            const newUrl = replaceUrlPathParam(urlWithoutParams, pathDefinition, pathParamName, this.paramToString(newValue));
             return this.router.navigateByUrl(newUrl + '?' + urlQueryParams);
           })
         ).subscribe();
@@ -118,7 +118,7 @@ export class RouterInputWrapperComponent implements OnInit, OnDestroy {
           switchMap(newValue => {
             const {urlWithoutParams, urlQueryParams} = splitUrlAndQueryParams(this.router.url);
             if (!!newValue) {
-              urlQueryParams.set(queryParamName, String(newValue));
+              urlQueryParams.set(queryParamName, this.paramToString(newValue));
             } else {
               urlQueryParams.delete(queryParamName);
             }
@@ -128,6 +128,10 @@ export class RouterInputWrapperComponent implements OnInit, OnDestroy {
         ).subscribe();
       }
     })
+  }
+
+  private paramToString(newValue: unknown) {
+    return newValue === undefined || newValue === null ? '' : String(newValue);
   }
 
   ngOnDestroy(): void {
