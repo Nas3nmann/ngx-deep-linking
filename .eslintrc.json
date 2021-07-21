@@ -37,6 +37,9 @@
         "*.ts",
         "*.tsx"
       ],
+      "excludedFiles": [
+        "*.spec.ts"
+      ],
       "extends": [
         "plugin:@nrwl/nx/typescript"
       ],

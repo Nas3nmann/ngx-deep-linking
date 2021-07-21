@@ -30,14 +30,14 @@ class TestComponent {
     this._testQueryParam = value;
   }
 
-  private _complexQueryParam!: string;
+  private _complexQueryParam!: Object;
 
   @Input()
-  get complexQueryParam(): any {
+  get complexQueryParam(): Object {
     return this._complexQueryParam;
   }
 
-  set complexQueryParam(value: any) {
+  set complexQueryParam(value: Object) {
     this._complexQueryParam = value;
   }
 }
