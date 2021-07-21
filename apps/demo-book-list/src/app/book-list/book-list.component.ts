@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output,} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output,} from '@angular/core';
 import {Book} from './book.model';
 import {animate, state, style, transition, trigger,} from '@angular/animations';
-import {untilDestroyed} from 'ngx-take-until-destroy';
 import {MatTableDataSource} from '@angular/material/table';
 import {ReplaySubject} from 'rxjs';
 
 @Component({
-  selector: 'book-list',
+  selector: 'jdrks-book-list',
   styleUrls: ['book-list.component.scss'],
   templateUrl: 'book-list.component.html',
   animations: [
@@ -20,7 +19,7 @@ import {ReplaySubject} from 'rxjs';
     ]),
   ],
 })
-export class BookListComponent implements OnInit, OnDestroy {
+export class BookListComponent implements OnInit {
   books = new MatTableDataSource(BOOKS);
   columnsToDisplay = ['author', 'title'];
 
@@ -50,7 +49,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.selectedBook = this.books.data.find((book) => book.id === bookId);
   }
 
-  private _searchString: string = '';
+  private _searchString = '';
 
   @Input()
   get searchString(): string {
@@ -64,13 +63,9 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchStringChange
-      .pipe(untilDestroyed(this))
       .subscribe((searchString) => {
         this.books.filter = searchString;
       });
-  }
-
-  ngOnDestroy(): void {
   }
 }
 
