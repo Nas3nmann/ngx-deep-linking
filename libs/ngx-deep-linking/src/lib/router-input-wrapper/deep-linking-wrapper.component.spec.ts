@@ -75,6 +75,7 @@ describe('RouterInputWrapperComponent', () => {
 
   beforeEach(() => {
     const activatedRouteSnapshotMock = {
+      pathFromRoot: [testRoute],
       routeConfig: testRoute,
       params: {
         testPathParam: '1',

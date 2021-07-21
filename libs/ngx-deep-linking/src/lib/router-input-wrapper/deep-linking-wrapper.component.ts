@@ -169,11 +169,12 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
                 return EMPTY;
               }
 
-              const {urlWithoutParams, urlQueryParams} =
-                splitUrlAndQueryParams(this.router.url);
-              const pathDefinition = this.router.config
-                .map((routeConfig) => routeConfig.path!)
-                .filter((paths) => !!paths)
+              const {urlWithoutParams, urlQueryParams} = splitUrlAndQueryParams(this.router.url);
+              const pathDefinition = this.activatedRoute.snapshot.pathFromRoot
+                .map((activatedRoute) => activatedRoute.routeConfig)
+                .filter((routeConfig) => !!routeConfig)
+                .map((routeConfig) => routeConfig!.path)
+                .filter((path) => !!path)
                 .join('/');
 
               const newUrl = replaceUrlPathParam(
@@ -203,8 +204,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
           .pipe(
             untilDestroyed(this),
             switchMap((newValue) => {
-              const {urlWithoutParams, urlQueryParams} =
-                splitUrlAndQueryParams(this.router.url);
+              const {urlWithoutParams, urlQueryParams} = splitUrlAndQueryParams(this.router.url);
               if (!!newValue) {
                 urlQueryParams.set(
                   queryParam.name,

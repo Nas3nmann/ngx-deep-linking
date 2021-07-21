@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {RouterModule} from '@angular/router';
-import {DeepLinkingRoute, DeepLinkingWrapperComponent, NgxDeepLinkingModule,} from '@jdrks/ngx-deep-linking';
+import {Route, RouterModule} from '@angular/router';
+import {NgxDeepLinkingModule,} from '@jdrks/ngx-deep-linking';
 import {FormsModule} from '@angular/forms';
 import {BookListComponent} from './book-list/book-list.component';
 import {MatTableModule} from '@angular/material/table';
@@ -12,27 +12,16 @@ import {BookContentComponent} from './book-list/book-content/book-content.compon
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 
-const routes: DeepLinkingRoute[] = [
+const routes: Route[] = [
   {
-    path: 'books/:selectedBookId',
-    component: DeepLinkingWrapperComponent,
-    wrappedComponent: BookListComponent,
-    deepLinking: {
-      params: [{name: 'selectedBookId', type: 'number'}],
-      queryParams: [{name: 'searchString', type: 'string'}],
-    },
-    children: [
-      {
-        path: 'content',
-        component: BookContentComponent,
-      },
-    ],
+    path: 'library/:location',
+    loadChildren: () => import('./book-list/book-list.module').then(m => m.BookListModule)
   },
   {
     path: '**',
-    redirectTo: '/books/',
-  },
-];
+    redirectTo: 'library/berlin',
+  }
+]
 
 @NgModule({
   declarations: [AppComponent, BookListComponent, BookContentComponent],
