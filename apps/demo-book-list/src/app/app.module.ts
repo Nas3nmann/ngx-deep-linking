@@ -29,7 +29,7 @@ const routes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     NgxDeepLinkingModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {useHash: true}),
     FormsModule,
     MatTableModule,
     MatToolbarModule,
