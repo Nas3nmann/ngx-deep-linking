@@ -1,7 +1,7 @@
 import {DeepLinkingWrapperComponent} from './deep-linking-wrapper.component';
-import {ActivatedRoute, Params, Route, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, Input, ViewContainerRef} from '@angular/core';
-import {DeepLinkingWrapperConfig} from './deep-linking-wrapper-config.model';
+import {DeepLinkingRoute, DeepLinkingWrapperConfig} from './deep-linking-route.model';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -46,24 +46,20 @@ describe('RouterInputWrapperComponent', () => {
   let viewContainerRefMock: any;
 
   const testConfig: DeepLinkingWrapperConfig = {
-    component: TestComponent,
     params: ['testPathParam'],
     queryParams: ['testQueryParam'],
   };
 
-  let testRoute: Route = {
+  let testRoute: DeepLinkingRoute = {
     path: 'test/:testPathParam',
     component: DeepLinkingWrapperComponent,
-    data: {
-      ngxDeepLinkingConfig: testConfig,
-    },
+    wrappedComponent: TestComponent,
+    deepLinking: testConfig,
   };
 
   beforeEach(() => {
     const activatedRouteSnapshotMock = {
-      data: {
-        ngxDeepLinkingConfig: testConfig,
-      },
+      routeConfig: testRoute,
       params: {
         testPathParam: 'initialPathParam',
       },

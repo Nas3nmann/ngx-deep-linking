@@ -8,7 +8,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeepLinkingWrapperConfig} from './deep-linking-wrapper-config.model';
+import {DeepLinkingRoute} from './deep-linking-route.model';
 import {untilDestroyed} from 'ngx-take-until-destroy';
 import {EMPTY, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
@@ -18,7 +18,8 @@ import {replaceUrlPathParam, splitUrlAndQueryParams} from './url-helper';
   templateUrl: './deep-linking-wrapper.component.html',
 })
 export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
-  private config!: DeepLinkingWrapperConfig;
+
+  private route!: DeepLinkingRoute;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -29,40 +30,42 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.config = this.readConfig();
+    this.route = this.readConfig();
 
-    const componentRef = this.resolveAndRenderComponent(this.config.component);
+    const componentRef = this.resolveAndRenderComponent(this.route.wrappedComponent!);
 
     this.populateAndSyncComponentInputsWithPathParams(
       componentRef.instance,
-      this.config.params
+      this.route.deepLinking!.params
     );
     this.populateAndSyncComponentInputsWithQueryParams(
       componentRef.instance,
-      this.config.queryParams
+      this.route.deepLinking!.queryParams
     );
 
     this.subscribeToComponentOutputsToSyncPathParams(
       componentRef.instance,
-      this.config.params
+      this.route.deepLinking!.params
     );
     this.subscribeToComponentOutputsToSyncQueryParams(
       componentRef.instance,
-      this.config.queryParams
+      this.route.deepLinking!.queryParams
     );
   }
 
   ngOnDestroy(): void {
   }
 
-  private readConfig(): DeepLinkingWrapperConfig {
-    const config: DeepLinkingWrapperConfig = this.activatedRoute.snapshot.data.ngxDeepLinkingConfig;
-    if (!config || !config.component) {
+  private readConfig(): DeepLinkingRoute {
+    const route: DeepLinkingRoute = <DeepLinkingRoute>this.activatedRoute.snapshot.routeConfig;
+    if (!route || !route.deepLinking || !route.wrappedComponent) {
       throw Error(
         'Configuration for ngx-deep-linking is missing in route definition'
       );
     }
-    return config;
+    route.deepLinking.params = route.deepLinking.params || [];
+    route.deepLinking.queryParams = route.deepLinking.queryParams || [];
+    return route;
   }
 
   private resolveAndRenderComponent(component: Type<any>): ComponentRef<any> {
