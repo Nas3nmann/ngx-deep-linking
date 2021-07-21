@@ -1,5 +1,13 @@
 {
   "name": "@jdrks/ngx-deep-linking",
+  "description": "A library for automatic synchronization of angular component fields with url path and query params.",
+  "keywords": [
+    "angular",
+    "routing",
+    "deep-linking"
+  ],
+  "author": "Julian Dierkes",
+  "license": "MIT",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^12.1.1",
