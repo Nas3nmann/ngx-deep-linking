@@ -7,6 +7,8 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
 * Easily synchronize your component fields with the url by **simple route configuration**
 * **Type safe** configuration
 * Supports synchronizing fields of type **number**, **string** and even **complex types as json**
+* Supports lazy loaded Angular modules
+* Supports hash routing strategy
 
 ## How to use
 
