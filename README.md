@@ -1,4 +1,4 @@
-# :rocket: ngx-deep-linking - Deep linking via configuration
+# :rocket: ngx-deep-linking
 
 A library for :sparkles:automatic synchronization:sparkles: of angular component fields with url path and query params.
 
