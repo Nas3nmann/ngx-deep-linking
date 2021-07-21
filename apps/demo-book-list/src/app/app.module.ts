@@ -3,14 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {Route, RouterModule} from '@angular/router';
-import {NgxDeepLinkingModule,} from '@jdrks/ngx-deep-linking';
-import {FormsModule} from '@angular/forms';
-import {BookListComponent} from './book-list/book-list.component';
-import {MatTableModule} from '@angular/material/table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BookContentComponent} from './book-list/book-content/book-content.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatInputModule} from '@angular/material/input';
 
 const routes: Route[] = [
   {
@@ -24,16 +17,11 @@ const routes: Route[] = [
 ]
 
 @NgModule({
-  declarations: [AppComponent, BookListComponent, BookContentComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgxDeepLinkingModule,
-    RouterModule.forRoot(routes, {useHash: true}),
-    FormsModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatInputModule,
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   bootstrap: [AppComponent],
 })
