@@ -1,0 +1,15 @@
+<form>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" [formControl]="firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" [formControl]="lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Message</mat-label>
+    <input matInput type="text" [formControl]="message">
+  </mat-form-field>
+  <button mat-button mat-flat-button color="primary">Submit</button>
+</form>

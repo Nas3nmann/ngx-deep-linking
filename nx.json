@@ -32,13 +32,22 @@
     ]
   },
   "projects": {
-    "demo": {
+    "demo-book-list": {
       "tags": []
     },
-    "demo-e2e": {
+    "demo-book-list-e2e": {
       "tags": [],
       "implicitDependencies": [
-        "demo"
+        "demo-book-list"
+      ]
+    },
+    "demo-form": {
+      "tags": []
+    },
+    "demo-form-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "demo-form"
       ]
     },
     "ngx-deep-linking": {

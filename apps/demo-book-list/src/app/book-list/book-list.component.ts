@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output,} from '@angular/core';
 import {Book} from './book.model';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger,} from '@angular/animations';
 import {untilDestroyed} from 'ngx-take-until-destroy';
 import {MatTableDataSource} from '@angular/material/table';
 import {ReplaySubject} from 'rxjs';
@@ -13,9 +13,12 @@ import {ReplaySubject} from 'rxjs';
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
       state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
     ]),
-  ]
+  ],
 })
 export class BookListComponent implements OnInit, OnDestroy {
   books = new MatTableDataSource(BOOKS);
@@ -44,7 +47,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   set selectedBookId(bookId: number | undefined) {
-    this.selectedBook = this.books.data.find(book => book.id === bookId);
+    this.selectedBook = this.books.data.find((book) => book.id === bookId);
   }
 
   private _searchString: string = '';
@@ -62,9 +65,9 @@ export class BookListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchStringChange
       .pipe(untilDestroyed(this))
-      .subscribe(searchString => {
+      .subscribe((searchString) => {
         this.books.filter = searchString;
-      })
+      });
   }
 
   ngOnDestroy(): void {
@@ -78,16 +81,14 @@ const BOOKS: Book[] = [
     title: 'Deeplinking for dummies',
     pages: [
       {index: 1, content: 'This is page 1'},
-      {index: 2, content: 'This is page 2'}
-    ]
+      {index: 2, content: 'This is page 2'},
+    ],
   },
   {
     id: 2,
     author: 'Janine Doyle',
     title: 'About books',
-    pages: [
-      {index: 1, content: 'So many pages'}
-    ]
+    pages: [{index: 1, content: 'So many pages'}],
   },
   {
     id: 3,
@@ -96,7 +97,7 @@ const BOOKS: Book[] = [
     pages: [
       {index: 1, content: 'Birth'},
       {index: 2, content: 'Life'},
-      {index: 3, content: 'Death'}
-    ]
+      {index: 3, content: 'Death'},
+    ],
   },
 ];

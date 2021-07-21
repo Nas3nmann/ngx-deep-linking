@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
-import {DeepLinkingRoute, DeepLinkingWrapperComponent, NgxDeepLinkingModule} from '@jdrks/ngx-deep-linking';
+import {DeepLinkingRoute, DeepLinkingWrapperComponent, NgxDeepLinkingModule,} from '@jdrks/ngx-deep-linking';
 import {FormsModule} from '@angular/forms';
 import {BookListComponent} from './book-list/book-list.component';
 import {MatTableModule} from '@angular/material/table';
@@ -18,17 +18,13 @@ const routes: DeepLinkingRoute[] = [
     component: DeepLinkingWrapperComponent,
     wrappedComponent: BookListComponent,
     deepLinking: {
-      params: [
-        {name: 'selectedBookId', type: 'number'}
-      ],
-      queryParams: [
-        {name: 'searchString', type: 'string'}
-      ],
+      params: [{name: 'selectedBookId', type: 'number'}],
+      queryParams: [{name: 'searchString', type: 'string'}],
     },
     children: [
       {
         path: 'content',
-        component: BookContentComponent
+        component: BookContentComponent,
       },
     ],
   },

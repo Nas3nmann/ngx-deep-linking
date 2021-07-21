@@ -7,8 +7,8 @@ export interface DeepLinkingRoute extends Route {
 }
 
 export interface DeepLinkingWrapperConfig {
-  params: DeepLinkingParam[];
-  queryParams: DeepLinkingParam[];
+  params?: DeepLinkingParam[];
+  queryParams?: DeepLinkingParam[];
 }
 
 export interface DeepLinkingParam {

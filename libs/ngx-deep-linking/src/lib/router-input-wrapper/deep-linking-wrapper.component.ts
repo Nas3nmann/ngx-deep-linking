@@ -36,20 +36,20 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
     this.populateAndSyncComponentInputsWithPathParams(
       componentRef.instance,
-      this.route.deepLinking!.params
+      this.route.deepLinking!.params!
     );
     this.populateAndSyncComponentInputsWithQueryParams(
       componentRef.instance,
-      this.route.deepLinking!.queryParams
+      this.route.deepLinking!.queryParams!
     );
 
     this.subscribeToComponentOutputsToSyncPathParams(
       componentRef.instance,
-      this.route.deepLinking!.params
+      this.route.deepLinking!.params!
     );
     this.subscribeToComponentOutputsToSyncQueryParams(
       componentRef.instance,
-      this.route.deepLinking!.queryParams
+      this.route.deepLinking!.queryParams!
     );
   }
 
@@ -122,7 +122,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
   private getTypedParam(deepLinkingParam: DeepLinkingParam, param: string): any {
     if (param === undefined || param === null) {
-      return param;
+      return deepLinkingParam.type === 'json' ? {} : param;
     }
 
     switch (deepLinkingParam.type) {
@@ -198,9 +198,8 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
                 urlQueryParams.delete(queryParam.name);
               }
 
-              return this.router.navigateByUrl(
-                `${urlWithoutParams}?${urlQueryParams}`
-              );
+              const newUrl = `${urlWithoutParams}?${urlQueryParams}`;
+              return this.router.navigateByUrl(newUrl);
             })
           )
           .subscribe();
@@ -209,6 +208,6 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
   }
 
   private paramToString(newValue: unknown) {
-    return newValue === undefined || newValue === null ? '' : String(newValue);
+    return newValue === undefined || newValue === null ? '' : JSON.stringify(newValue);
   }
 }
