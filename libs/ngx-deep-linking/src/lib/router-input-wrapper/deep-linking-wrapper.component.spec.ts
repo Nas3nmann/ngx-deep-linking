@@ -8,14 +8,14 @@ import {Subject} from 'rxjs';
   template: '',
 })
 class TestComponent {
-  private _testPathParam!: string;
+  private _testPathParam!: number;
 
   @Input()
-  get testPathParam(): string {
+  get testPathParam(): number {
     return this._testPathParam;
   }
 
-  set testPathParam(value: string) {
+  set testPathParam(value: number) {
     this._testPathParam = value;
   }
 
@@ -28,6 +28,17 @@ class TestComponent {
 
   set testQueryParam(value: string) {
     this._testQueryParam = value;
+  }
+
+  private _complexQueryParam!: string;
+
+  @Input()
+  get complexQueryParam(): any {
+    return this._complexQueryParam;
+  }
+
+  set complexQueryParam(value: any) {
+    this._complexQueryParam = value;
   }
 }
 
@@ -46,8 +57,13 @@ describe('RouterInputWrapperComponent', () => {
   let viewContainerRefMock: any;
 
   const testConfig: DeepLinkingWrapperConfig = {
-    params: ['testPathParam'],
-    queryParams: ['testQueryParam'],
+    params: [
+      {name: 'testPathParam', type: 'number'}
+    ],
+    queryParams: [
+      {name: 'testQueryParam', type: 'string'},
+      {name: 'complexQueryParam', type: 'json'}
+    ],
   };
 
   let testRoute: DeepLinkingRoute = {
@@ -61,7 +77,7 @@ describe('RouterInputWrapperComponent', () => {
     const activatedRouteSnapshotMock = {
       routeConfig: testRoute,
       params: {
-        testPathParam: 'initialPathParam',
+        testPathParam: '1',
       },
       queryParams: {
         testQueryParam: 'initialQueryParam',
@@ -117,29 +133,29 @@ describe('RouterInputWrapperComponent', () => {
 
   describe('Path params', () => {
     it('should be used to populate component inputs initially', () => {
-      expect(wrappedComponent.testPathParam).toBe('initialPathParam');
+      expect(wrappedComponent.testPathParam).toBe(1);
     });
 
     it('should be used to sync component inputs on changes', () => {
-      paramChanges.next({testPathParam: 'changedPathParam'});
+      paramChanges.next({testPathParam: '2'});
 
-      expect(wrappedComponent.testPathParam).toBe('changedPathParam');
+      expect(wrappedComponent.testPathParam).toBe(2);
     });
 
     it('should not do anything if input and change are equal', () => {
       const setterSpy = jest.spyOn(wrappedComponent, 'testPathParam', 'set');
-      paramChanges.next({testPathParam: 'initialPathParam'});
+      paramChanges.next({testPathParam: '1'});
 
-      expect(wrappedComponent.testPathParam).toBe('initialPathParam');
+      expect(wrappedComponent.testPathParam).toBe(1);
       expect(setterSpy).not.toHaveBeenCalled();
     });
 
     it('should not be used for syncing any more after destroy', () => {
       routerInputWrapperComponent.ngOnDestroy();
 
-      paramChanges.next({testPathParam: 'changedPathParam'});
+      paramChanges.next({testPathParam: '2'});
 
-      expect(wrappedComponent.testPathParam).toBe('initialPathParam');
+      expect(wrappedComponent.testPathParam).toBe(1);
     });
   });
 
@@ -169,5 +185,18 @@ describe('RouterInputWrapperComponent', () => {
 
       expect(wrappedComponent.testQueryParam).toBe('initialQueryParam');
     });
+
+    it('should preserve the param type', () => {
+      queryParamChanges.next({testQueryParam: 'changedQueryParam'});
+
+      expect(wrappedComponent.testQueryParam).toBe('changedQueryParam');
+    });
+  });
+
+  it('should support json object deep linking', () => {
+    const complexObject = {key1: 'value', key2: 2};
+    queryParamChanges.next({complexQueryParam: '{"key1": "value", "key2": 2}'});
+
+    expect(wrappedComponent.complexQueryParam).toStrictEqual(complexObject);
   });
 });

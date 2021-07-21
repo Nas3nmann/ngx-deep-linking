@@ -8,7 +8,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeepLinkingRoute} from './deep-linking-route.model';
+import {DeepLinkingParam, DeepLinkingRoute} from './deep-linking-route.model';
 import {untilDestroyed} from 'ngx-take-until-destroy';
 import {EMPTY, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
@@ -77,7 +77,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
   private populateAndSyncComponentInputsWithPathParams(
     componentInstance: any,
-    params: string[]
+    params: DeepLinkingParam[]
   ): void {
     this.populateInputsFromParams(
       componentInstance,
@@ -93,7 +93,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
   private populateAndSyncComponentInputsWithQueryParams(
     componentInstance: any,
-    params: string[]
+    params: DeepLinkingParam[]
   ): void {
     this.populateInputsFromParams(
       componentInstance,
@@ -109,24 +109,38 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
   private populateInputsFromParams(
     componentInstance: any,
-    inputNames: string[],
+    deepLinkingParams: DeepLinkingParam[],
     params: Params
   ) {
-    for (let inputName of inputNames) {
-      if (
-        this.paramToString(componentInstance[inputName]) !== params[inputName]
-      ) {
-        componentInstance[inputName] = params[inputName];
+    for (let deepLinkingParam of deepLinkingParams) {
+      const paramAsString = this.paramToString(componentInstance[deepLinkingParam.name]);
+      if (paramAsString !== params[deepLinkingParam.name]) {
+        componentInstance[deepLinkingParam.name] = this.getTypedParam(deepLinkingParam, params[deepLinkingParam.name]);
       }
+    }
+  }
+
+  private getTypedParam(deepLinkingParam: DeepLinkingParam, param: string): any {
+    if (param === undefined || param === null) {
+      return param;
+    }
+
+    switch (deepLinkingParam.type) {
+      case 'string':
+        return param;
+      case 'number':
+        return Number(param);
+      case 'json':
+        return JSON.parse(param);
     }
   }
 
   private subscribeToComponentOutputsToSyncPathParams(
     instance: any,
-    pathParams: string[]
+    pathParams: DeepLinkingParam[]
   ) {
-    pathParams.forEach((pathParamName) => {
-      const outputName = `${pathParamName}Change`;
+    pathParams.forEach((pathParam) => {
+      const outputName = `${pathParam.name}Change`;
       const output: Observable<unknown> = instance[outputName];
 
       if (!!output) {
@@ -149,7 +163,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
               const newUrl = replaceUrlPathParam(
                 urlWithoutParams,
                 pathDefinition,
-                pathParamName,
+                pathParam.name,
                 this.paramToString(newValue)
               );
               return this.router.navigateByUrl(newUrl + '?' + urlQueryParams);
@@ -162,10 +176,10 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
 
   private subscribeToComponentOutputsToSyncQueryParams(
     instance: any,
-    queryParams: string[]
+    queryParams: DeepLinkingParam[]
   ) {
-    queryParams.forEach((queryParamName) => {
-      const outputName = `${queryParamName}Change`;
+    queryParams.forEach((queryParam) => {
+      const outputName = `${queryParam.name}Change`;
       const output: Observable<unknown> = instance[outputName];
 
       if (!!output) {
@@ -177,11 +191,11 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
                 splitUrlAndQueryParams(this.router.url);
               if (!!newValue) {
                 urlQueryParams.set(
-                  queryParamName,
+                  queryParam.name,
                   this.paramToString(newValue)
                 );
               } else {
-                urlQueryParams.delete(queryParamName);
+                urlQueryParams.delete(queryParam.name);
               }
 
               return this.router.navigateByUrl(

@@ -20,8 +20,10 @@ import {ReplaySubject} from 'rxjs';
 export class BookListComponent implements OnInit, OnDestroy {
   books = new MatTableDataSource(BOOKS);
   columnsToDisplay = ['author', 'title'];
+
   @Output()
   searchStringChange: ReplaySubject<string> = new ReplaySubject<string>();
+
   @Output()
   private selectedBookIdChange: EventEmitter<number> = new EventEmitter<number>();
 

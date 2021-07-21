@@ -18,13 +18,17 @@ const routes: DeepLinkingRoute[] = [
     component: DeepLinkingWrapperComponent,
     wrappedComponent: BookListComponent,
     deepLinking: {
-      params: ['selectedBookId'],
-      queryParams: ['searchString'],
+      params: [
+        {name: 'selectedBookId', type: 'number'}
+      ],
+      queryParams: [
+        {name: 'searchString', type: 'string'}
+      ],
     },
     children: [
       {
         path: 'content',
-        component: BookContentComponent,
+        component: BookContentComponent
       },
     ],
   },

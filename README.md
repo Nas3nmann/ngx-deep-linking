@@ -2,6 +2,12 @@
 
 A library for :sparkles:automatic synchronization:sparkles: of angular component fields with url path and query params.
 
+## Why?
+
+* Easily synchronize your component fields with the url by **simple route configuration**
+* **Type safe** configuration
+* Supports synchronizing fields of type **number**, **string** and even **complex types as json**
+
 ## How to use
 
 1. Install
@@ -34,6 +40,8 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
   or `deepLinking.queryParams` fields.
   (In this example the _selectedBookId_ will be synced with the corresponding path parameter. The _searchString_ will be
   added as url search parameter of the same name once it has a value)
+* You can provide string(`type: 'string'`) fields, number fields(`type: 'number'`) and also fields that contain complex
+  objects (`type: 'json'`).
 
   ```
   import {DeepLinkingRoute, DeepLinkingWrapperComponent} from '@jdrks/ngx-deep-linking';
@@ -44,9 +52,13 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
       component: DeepLinkingWrapperComponent,
       wrappedComponent: BookListComponent,
       deepLinking: {
-        params: ['selectedBookId'],
-        queryParams: ['searchString']
-      }
+        params: [
+          {name: 'selectedBookId', type: 'number'}
+        ],
+        queryParams: [
+          {name: 'searchString', type: 'string'}
+        ],
+      },
     }
   ];
   ```
