@@ -1,6 +1,6 @@
 # ngx-deep-linking
 
-A library for :sparkles:automatic synchronization:sparkles: angular component fields with url path and query params.
+A library for :sparkles:automatic synchronization:sparkles: of angular component fields with url path and query params.
 
 ## How to use
 
