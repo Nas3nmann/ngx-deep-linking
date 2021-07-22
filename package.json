@@ -29,7 +29,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && copy README.md dist/libs/ngx-deep-linking"
+    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking"
   },
   "private": true,
   "dependencies": {
@@ -69,7 +69,6 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "4.19.0",
     "@typescript-eslint/parser": "4.19.0",
-    "copy": "^0.3.2",
     "cypress": "^7.3.0",
     "dotenv": "8.2.0",
     "eslint": "7.22.0",
