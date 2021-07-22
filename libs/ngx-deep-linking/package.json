@@ -6,7 +6,11 @@
     "routing",
     "deep-linking"
   ],
-  "author": "Julian Dierkes",
+  "author": {
+    "name": "Julian Dierkes",
+    "email": "nas3nmann@googlemail.com",
+    "url": "http://dierkes.dev"
+  },
   "license": "MIT",
   "version": "0.0.1",
   "peerDependencies": {
