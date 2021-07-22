@@ -27,7 +27,8 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "release:build": "nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking"
   },
   "private": true,
   "dependencies": {
