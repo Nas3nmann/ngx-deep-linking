@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf dist",
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "nx": "nx",
@@ -28,7 +29,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "release:build": "nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking"
+    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && copy README.md dist/libs/ngx-deep-linking"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +69,7 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "4.19.0",
     "@typescript-eslint/parser": "4.19.0",
+    "copy": "^0.3.2",
     "cypress": "^7.3.0",
     "dotenv": "8.2.0",
     "eslint": "7.22.0",
@@ -77,6 +79,7 @@
     "jest-preset-angular": "9.0.3",
     "ng-packagr": "^12.1.0",
     "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
     "typescript": "~4.2.4"
