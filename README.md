@@ -24,7 +24,7 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
   * with yarn ``yarn add @jdrks/ngx-deep-linking``
 
 2. Import NgxDeepLinkingModule into your module
-   ```
+   ```ts
    import {NgxDeepLinkingModule} from '@jdrks/ngx-deep-linking';
 
    @NgModule({
@@ -51,7 +51,7 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
   * You can provide string(`type: 'string'`) fields, number fields(`type: 'number'`) and also fields that contain
     complex objects (`type: 'json'`).
 
-    ```
+    ```ts
     import {DeepLinkingRoute, DeepLinkingWrapperComponent} from '@jdrks/ngx-deep-linking';
   
     const routes: DeepLinkingRoute[] = [
@@ -77,7 +77,7 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
   * *may have* `Output()` declarations to adjust the url on changes inside the component (The output field name follows
     the naming convention for Angular's two way data binding and appends 'Change' to the outputs)
 
-    ```
+    ```ts
     export class BookListComponent {
   
       @Input()
