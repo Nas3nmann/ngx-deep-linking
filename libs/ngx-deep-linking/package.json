@@ -6,11 +6,16 @@
     "routing",
     "deep-linking"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nas3nmann/ngx-input-deep-linking"
+  },
   "author": {
     "name": "Julian Dierkes",
     "email": "nas3nmann@googlemail.com",
     "url": "http://dierkes.dev"
   },
+  "homepage": "https://github.com/Nas3nmann/ngx-input-deep-linking#readme",
   "license": "MIT",
   "version": "1.0.2",
   "peerDependencies": {
