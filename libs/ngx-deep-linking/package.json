@@ -8,14 +8,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nas3nmann/ngx-input-deep-linking"
+    "url": "https://github.com/Nas3nmann/ngx-deep-linking"
   },
   "author": {
     "name": "Julian Dierkes",
     "email": "nas3nmann@googlemail.com",
     "url": "http://dierkes.dev"
   },
-  "homepage": "https://github.com/Nas3nmann/ngx-input-deep-linking#readme",
+  "homepage": "https://github.com/Nas3nmann/ngx-deep-linking#readme",
   "license": "MIT",
   "version": "1.0.3",
   "peerDependencies": {
