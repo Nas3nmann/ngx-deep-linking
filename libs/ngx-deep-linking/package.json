@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Nas3nmann/ngx-deep-linking#readme",
   "license": "MIT",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "peerDependencies": {
     "@angular/common": ">= 8 < 14",
     "@angular/core": ">= 8 < 14",
