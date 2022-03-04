@@ -29,7 +29,8 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking"
+    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking",
+    "release:publish": "cd dist\\libs\\ngx-deep-linking && npm publish --access=public"
   },
   "private": true,
   "dependencies": {
@@ -44,7 +45,6 @@
     "@angular/platform-browser-dynamic": "^12.0.0",
     "@angular/router": "^12.0.0",
     "@nrwl/angular": "12.5.7",
-    "ngx-take-until-destroy": "^5.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
