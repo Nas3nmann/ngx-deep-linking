@@ -1,38 +1,53 @@
 <mat-toolbar>
   <mat-form-field>
     <mat-label>Search</mat-label>
-    <input [(ngModel)]="searchString" matInput data-test="book-search-field"/>
+    <input [(ngModel)]="searchString" matInput data-test="book-search-field" />
   </mat-form-field>
 </mat-toolbar>
-<table [dataSource]="books"
-       class="mat-elevation-z8"
-       mat-table
-       multiTemplateDataRows>
+<table
+  [dataSource]="books"
+  class="mat-elevation-z8"
+  mat-table
+  multiTemplateDataRows
+>
   <ng-container
     *ngFor="let column of columnsToDisplay"
-    matColumnDef="{{ column }}">
+    matColumnDef="{{ column }}"
+  >
     <th *matHeaderCellDef mat-header-cell>{{ column }}</th>
     <td *matCellDef="let element" mat-cell>{{ element[column] }}</td>
   </ng-container>
 
   <ng-container matColumnDef="expandedContent">
-    <td *matCellDef="let element"
-        [attr.colspan]="columnsToDisplay.length"
-        mat-cell>
-      <div [@detailExpand]="element === selectedBook ? 'expanded' : 'collapsed'"
-           class="example-element-detail">
+    <td
+      *matCellDef="let element"
+      [attr.colspan]="columnsToDisplay.length"
+      mat-cell
+    >
+      <div
+        [@detailExpand]="element === selectedBook ? 'expanded' : 'collapsed'"
+        class="example-element-detail"
+      >
         <jdrks-book-content [book]="element"></jdrks-book-content>
       </div>
     </td>
   </ng-container>
 
   <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-  <tr (click)="selectedBook = selectedBook === element ? undefined : element"
-      *matRowDef="let element; columns: columnsToDisplay"
-      [class.example-expanded-row]="selectedBook === element"
-      class="example-element-row" mat-row data-test="book-list-row" data-id="{{element.id}}">
-  </tr>
-  <tr *matRowDef="let element; columns: ['expandedContent']"
-      class="example-detail-row" mat-row data-test="book-list-expanded-row" data-id="{{element.id}}">
-  </tr>
+  <tr
+    (click)="selectedBook = selectedBook === element ? undefined : element"
+    *matRowDef="let element; columns: columnsToDisplay"
+    [class.example-expanded-row]="selectedBook === element"
+    class="example-element-row"
+    mat-row
+    data-test="book-list-row"
+    data-id="{{ element.id }}"
+  ></tr>
+  <tr
+    *matRowDef="let element; columns: ['expandedContent']"
+    class="example-detail-row"
+    mat-row
+    data-test="book-list-expanded-row"
+    data-id="{{ element.id }}"
+  ></tr>
 </table>

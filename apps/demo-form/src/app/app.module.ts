@@ -1,19 +1,22 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {Route, RouterModule} from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
+import { Route, RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Route[] = [
   {
     path: 'form',
-    loadChildren: () => import('./contact-form/contact-form.module').then(m => m.ContactFormModule)
+    loadChildren: () =>
+      import('./contact-form/contact-form.module').then(
+        (m) => m.ContactFormModule
+      ),
   },
   {
     path: '**',
-    redirectTo: 'form'
-  }
+    redirectTo: 'form',
+  },
 ];
 
 @NgModule({
@@ -26,5 +29,4 @@ const routes: Route[] = [
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

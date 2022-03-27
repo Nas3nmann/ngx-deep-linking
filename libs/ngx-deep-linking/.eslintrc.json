@@ -22,7 +22,9 @@
             "type": "element",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "no-extra-boolean-cast": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
       }
     },
     {

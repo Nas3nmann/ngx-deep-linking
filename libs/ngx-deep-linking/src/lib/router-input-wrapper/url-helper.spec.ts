@@ -1,4 +1,4 @@
-import {replaceUrlPathParam, splitUrlAndQueryParams} from './url-helper';
+import { replaceUrlPathParam, splitUrlAndQueryParams } from './url-helper';
 
 describe('Splitting url params', () => {
   it('should split url and query params', () => {
@@ -7,7 +7,7 @@ describe('Splitting url params', () => {
     const expectedQueryParams = new URLSearchParams();
     expectedQueryParams.set('category', 'education');
 
-    const {urlWithoutParams, urlQueryParams} =
+    const { urlWithoutParams, urlQueryParams } =
       splitUrlAndQueryParams(testUrl);
 
     expect(urlWithoutParams).toEqual(expectedUrl);

@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Book} from '../book.model';
+import { Component, Input } from '@angular/core';
+import { Book } from '../book.model';
 
 @Component({
   selector: 'jdrks-book-content',

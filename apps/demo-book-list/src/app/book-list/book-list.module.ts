@@ -1,15 +1,14 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {MatTableModule} from '@angular/material/table';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatInputModule} from '@angular/material/input';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
 
-import {BookListRoutingModule} from './book-list-routing.module';
-import {BookContentComponent} from './book-content/book-content.component';
-import {BookListComponent} from './book-list.component';
-import {NgxDeepLinkingModule} from '@jdrks/ngx-deep-linking';
-
+import { BookListRoutingModule } from './book-list-routing.module';
+import { BookContentComponent } from './book-content/book-content.component';
+import { BookListComponent } from './book-list.component';
+import { NgxDeepLinkingModule } from '@jdrks/ngx-deep-linking';
 
 @NgModule({
   imports: [
@@ -19,12 +18,8 @@ import {NgxDeepLinkingModule} from '@jdrks/ngx-deep-linking';
     MatTableModule,
     MatToolbarModule,
     MatInputModule,
-    NgxDeepLinkingModule
+    NgxDeepLinkingModule,
   ],
-  declarations: [
-    BookContentComponent,
-    BookListComponent,
-  ]
+  declarations: [BookContentComponent, BookListComponent],
 })
-export class BookListModule {
-}
+export class BookListModule {}

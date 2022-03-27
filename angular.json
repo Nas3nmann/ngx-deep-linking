@@ -9,9 +9,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/demo-book-list",
             "index": "apps/demo-book-list/src/index.html",
@@ -23,9 +21,7 @@
               "apps/demo-book-list/src/favicon.ico",
               "apps/demo-book-list/src/assets"
             ],
-            "styles": [
-              "apps/demo-book-list/src/styles.scss"
-            ],
+            "styles": ["apps/demo-book-list/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -87,15 +83,11 @@
               "apps/demo-book-list/src/**/*.html"
             ]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demo-book-list"
-          ],
+          "outputs": ["coverage/apps/demo-book-list"],
           "options": {
             "jestConfig": "apps/demo-book-list/jest.config.js",
             "passWithNoTests": true
@@ -125,19 +117,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/demo-book-list-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/demo-book-list-e2e/**/*.{js,ts}"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         }
       },
       "tags": [],
-      "implicitDependencies": [
-        "demo-book-list"
-      ]
+      "implicitDependencies": ["demo-book-list"]
     },
     "demo-form": {
       "projectType": "application",
@@ -147,9 +133,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/demo-form",
             "index": "apps/demo-form/src/index.html",
@@ -161,9 +145,7 @@
               "apps/demo-form/src/favicon.ico",
               "apps/demo-form/src/assets"
             ],
-            "styles": [
-              "apps/demo-form/src/styles.scss"
-            ],
+            "styles": ["apps/demo-form/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -225,15 +207,11 @@
               "apps/demo-form/src/**/*.html"
             ]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demo-form"
-          ],
+          "outputs": ["coverage/apps/demo-form"],
           "options": {
             "jestConfig": "apps/demo-form/jest.config.js",
             "passWithNoTests": true
@@ -263,19 +241,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/demo-form-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/demo-form-e2e/**/*.{js,ts}"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         }
       },
       "tags": [],
-      "implicitDependencies": [
-        "demo-form"
-      ]
+      "implicitDependencies": ["demo-form"]
     },
     "ngx-deep-linking": {
       "projectType": "library",
@@ -284,9 +256,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/ngx-deep-linking"
-          ],
+          "outputs": ["dist/libs/ngx-deep-linking"],
           "options": {
             "project": "libs/ngx-deep-linking/ng-package.json"
           },
@@ -302,9 +272,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ngx-deep-linking"
-          ],
+          "outputs": ["coverage/libs/ngx-deep-linking"],
           "options": {
             "jestConfig": "libs/ngx-deep-linking/jest.config.js",
             "passWithNoTests": true
@@ -318,9 +286,7 @@
               "libs/ngx-deep-linking/src/**/*.html"
             ]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         }
       },
       "tags": []

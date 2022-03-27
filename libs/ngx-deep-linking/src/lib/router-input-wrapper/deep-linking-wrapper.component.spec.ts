@@ -1,8 +1,11 @@
-import {DeepLinkingWrapperComponent} from './deep-linking-wrapper.component';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Component, Input, ViewContainerRef} from '@angular/core';
-import {DeepLinkingRoute, DeepLinkingWrapperConfig} from './deep-linking-route.model';
-import {Subject} from 'rxjs';
+import { DeepLinkingWrapperComponent } from './deep-linking-wrapper.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, Input, ViewContainerRef } from '@angular/core';
+import {
+  DeepLinkingRoute,
+  DeepLinkingWrapperConfig,
+} from './deep-linking-route.model';
+import { Subject } from 'rxjs';
 
 @Component({
   template: '',
@@ -57,12 +60,10 @@ describe('RouterInputWrapperComponent', () => {
   let viewContainerRefMock: any;
 
   const testConfig: DeepLinkingWrapperConfig = {
-    params: [
-      {name: 'testPathParam', type: 'number'}
-    ],
+    params: [{ name: 'testPathParam', type: 'number' }],
     queryParams: [
-      {name: 'testQueryParam', type: 'string'},
-      {name: 'complexQueryParam', type: 'json'}
+      { name: 'testQueryParam', type: 'string' },
+      { name: 'complexQueryParam', type: 'json' },
     ],
   };
 
@@ -138,14 +139,14 @@ describe('RouterInputWrapperComponent', () => {
     });
 
     it('should be used to sync component inputs on changes', () => {
-      paramChanges.next({testPathParam: '2'});
+      paramChanges.next({ testPathParam: '2' });
 
       expect(wrappedComponent.testPathParam).toBe(2);
     });
 
     it('should not do anything if input and change are equal', () => {
       const setterSpy = jest.spyOn(wrappedComponent, 'testPathParam', 'set');
-      paramChanges.next({testPathParam: '1'});
+      paramChanges.next({ testPathParam: '1' });
 
       expect(wrappedComponent.testPathParam).toBe(1);
       expect(setterSpy).not.toHaveBeenCalled();
@@ -154,7 +155,7 @@ describe('RouterInputWrapperComponent', () => {
     it('should not be used for syncing any more after destroy', () => {
       routerInputWrapperComponent.ngOnDestroy();
 
-      paramChanges.next({testPathParam: '2'});
+      paramChanges.next({ testPathParam: '2' });
 
       expect(wrappedComponent.testPathParam).toBe(1);
     });
@@ -166,14 +167,14 @@ describe('RouterInputWrapperComponent', () => {
     });
 
     it('should be used to sync component inputs on changes', () => {
-      queryParamChanges.next({testQueryParam: 'changedQueryParam'});
+      queryParamChanges.next({ testQueryParam: 'changedQueryParam' });
 
       expect(wrappedComponent.testQueryParam).toBe('changedQueryParam');
     });
 
     it('should not do anything if input and change are equal', () => {
       const setterSpy = jest.spyOn(wrappedComponent, 'testQueryParam', 'set');
-      queryParamChanges.next({testQueryParam: 'initialQueryParam'});
+      queryParamChanges.next({ testQueryParam: 'initialQueryParam' });
 
       expect(wrappedComponent.testQueryParam).toBe('initialQueryParam');
       expect(setterSpy).not.toHaveBeenCalled();
@@ -182,21 +183,23 @@ describe('RouterInputWrapperComponent', () => {
     it('should not be used for syncing any more after destroy', () => {
       routerInputWrapperComponent.ngOnDestroy();
 
-      queryParamChanges.next({testQueryParam: 'changedQueryParam'});
+      queryParamChanges.next({ testQueryParam: 'changedQueryParam' });
 
       expect(wrappedComponent.testQueryParam).toBe('initialQueryParam');
     });
 
     it('should preserve the param type', () => {
-      queryParamChanges.next({testQueryParam: 'changedQueryParam'});
+      queryParamChanges.next({ testQueryParam: 'changedQueryParam' });
 
       expect(wrappedComponent.testQueryParam).toBe('changedQueryParam');
     });
   });
 
   it('should support json object deep linking', () => {
-    const complexObject = {key1: 'value', key2: 2};
-    queryParamChanges.next({complexQueryParam: '{"key1": "value", "key2": 2}'});
+    const complexObject = { key1: 'value', key2: 2 };
+    queryParamChanges.next({
+      complexQueryParam: '{"key1": "value", "key2": 2}',
+    });
 
     expect(wrappedComponent.complexQueryParam).toStrictEqual(complexObject);
   });

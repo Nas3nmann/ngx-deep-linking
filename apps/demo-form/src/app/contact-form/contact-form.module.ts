@@ -1,18 +1,15 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {ContactFormRoutingModule} from './contact-form-routing.module';
-import {ContactFormComponent} from './contact-form/contact-form.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-
+import { ContactFormRoutingModule } from './contact-form-routing.module';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations: [
-    ContactFormComponent
-  ],
+  declarations: [ContactFormComponent],
   imports: [
     CommonModule,
     ContactFormRoutingModule,
@@ -20,8 +17,7 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatInputModule
-  ]
+    MatInputModule,
+  ],
 })
-export class ContactFormModule {
-}
+export class ContactFormModule {}

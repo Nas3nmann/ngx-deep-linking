@@ -1,9 +1,9 @@
-import {Route} from '@angular/router';
-import {Type} from '@angular/core';
+import { Route } from '@angular/router';
+import { Type } from '@angular/core';
 
 export interface DeepLinkingRoute extends Route {
-  wrappedComponent?: Type<any>,
-  deepLinking?: DeepLinkingWrapperConfig
+  wrappedComponent?: Type<any>;
+  deepLinking?: DeepLinkingWrapperConfig;
 }
 
 export interface DeepLinkingWrapperConfig {
@@ -12,11 +12,11 @@ export interface DeepLinkingWrapperConfig {
 }
 
 export interface DeepLinkingPathParam {
-  name: string,
-  type: 'string' | 'number'
+  name: string;
+  type: 'string' | 'number';
 }
 
 export interface DeepLinkingQueryParam {
-  name: string,
-  type: 'string' | 'number' | 'json'
+  name: string;
+  type: 'string' | 'number' | 'json';
 }

@@ -1,10 +1,21 @@
-import {Component, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewContainerRef,} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeepLinkingPathParam, DeepLinkingQueryParam, DeepLinkingRoute} from './deep-linking-route.model';
-import {EMPTY, Observable, Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
-import {replaceUrlPathParam, splitUrlAndQueryParams} from './url-helper';
-import {ComponentType} from '@angular/cdk/overlay';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef,
+} from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  DeepLinkingPathParam,
+  DeepLinkingQueryParam,
+  DeepLinkingRoute,
+} from './deep-linking-route.model';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { replaceUrlPathParam, splitUrlAndQueryParams } from './url-helper';
+import { ComponentType } from '@angular/cdk/overlay';
 
 type UnknownComponent = Record<string, any>;
 
@@ -12,7 +23,6 @@ type UnknownComponent = Record<string, any>;
   templateUrl: './deep-linking-wrapper.component.html',
 })
 export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
-
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   private route!: DeepLinkingRoute;
@@ -22,13 +32,14 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly componentFactoryResolver: ComponentFactoryResolver,
     private readonly viewContainerRef: ViewContainerRef
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route = this.readConfig();
 
-    const componentRef = this.resolveAndRenderComponent(this.route.wrappedComponent!);
+    const componentRef = this.resolveAndRenderComponent(
+      this.route.wrappedComponent!
+    );
 
     this.populateAndSyncComponentInputsWithPathParams(
       componentRef.instance,
@@ -55,7 +66,8 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
   }
 
   private readConfig(): DeepLinkingRoute {
-    const route: DeepLinkingRoute = this.activatedRoute.snapshot.routeConfig as DeepLinkingRoute;
+    const route: DeepLinkingRoute = this.activatedRoute.snapshot
+      .routeConfig as DeepLinkingRoute;
     if (!route || !route.deepLinking || !route.wrappedComponent) {
       throw Error(
         'Configuration for ngx-deep-linking is missing in route definition'
@@ -66,7 +78,9 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     return route;
   }
 
-  private resolveAndRenderComponent(component: ComponentType<UnknownComponent>): ComponentRef<UnknownComponent> {
+  private resolveAndRenderComponent(
+    component: ComponentType<UnknownComponent>
+  ): ComponentRef<UnknownComponent> {
     const componentFactory =
       this.componentFactoryResolver.resolveComponentFactory(component);
     this.viewContainerRef.clear();
@@ -77,11 +91,19 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     componentInstance: UnknownComponent,
     params: DeepLinkingPathParam[]
   ): void {
-    this.populateInputsFromPathParams(componentInstance, params, this.activatedRoute.snapshot.params);
+    this.populateInputsFromPathParams(
+      componentInstance,
+      params,
+      this.activatedRoute.snapshot.params
+    );
     this.activatedRoute.params
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((changedParams) => {
-        this.populateInputsFromPathParams(componentInstance, params, changedParams);
+      .subscribe((changedParams: any) => {
+        this.populateInputsFromPathParams(
+          componentInstance,
+          params,
+          changedParams
+        );
       });
   }
 
@@ -91,14 +113,22 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     params: Params
   ) {
     for (const deepLinkingParam of deepLinkingParams) {
-      const paramAsString = this.paramToString(componentInstance[deepLinkingParam.name]);
+      const paramAsString = this.paramToString(
+        componentInstance[deepLinkingParam.name]
+      );
       if (paramAsString !== params[deepLinkingParam.name]) {
-        componentInstance[deepLinkingParam.name] = this.getTypedPathParam(deepLinkingParam, params[deepLinkingParam.name]);
+        componentInstance[deepLinkingParam.name] = this.getTypedPathParam(
+          deepLinkingParam,
+          params[deepLinkingParam.name]
+        );
       }
     }
   }
 
-  private getTypedPathParam(deepLinkingParam: DeepLinkingPathParam, param: string): string | number {
+  private getTypedPathParam(
+    deepLinkingParam: DeepLinkingPathParam,
+    param: string
+  ): string | number {
     switch (deepLinkingParam.type) {
       case 'string':
         return param;
@@ -113,11 +143,19 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     componentInstance: UnknownComponent,
     params: DeepLinkingQueryParam[]
   ): void {
-    this.populateInputsFromQueryParams(componentInstance, params, this.activatedRoute.snapshot.queryParams);
+    this.populateInputsFromQueryParams(
+      componentInstance,
+      params,
+      this.activatedRoute.snapshot.queryParams
+    );
     this.activatedRoute.queryParams
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((changedParams) => {
-        this.populateInputsFromQueryParams(componentInstance, params, changedParams);
+      .subscribe((changedParams: any) => {
+        this.populateInputsFromQueryParams(
+          componentInstance,
+          params,
+          changedParams
+        );
       });
   }
 
@@ -127,14 +165,22 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     params: Params
   ) {
     for (const deepLinkingParam of deepLinkingParams) {
-      const paramAsString = this.paramToString(componentInstance[deepLinkingParam.name]);
+      const paramAsString = this.paramToString(
+        componentInstance[deepLinkingParam.name]
+      );
       if (paramAsString !== params[deepLinkingParam.name]) {
-        componentInstance[deepLinkingParam.name] = this.getTypedQueryParam(deepLinkingParam, params[deepLinkingParam.name]);
+        componentInstance[deepLinkingParam.name] = this.getTypedQueryParam(
+          deepLinkingParam,
+          params[deepLinkingParam.name]
+        );
       }
     }
   }
 
-  private getTypedQueryParam(deepLinkingParam: DeepLinkingQueryParam, param: string): string | number | Record<string, unknown> {
+  private getTypedQueryParam(
+    deepLinkingParam: DeepLinkingQueryParam,
+    param: string
+  ): string | number | Record<string, unknown> {
     if (param === undefined || param === null) {
       return deepLinkingParam.type === 'json' ? {} : param;
     }
@@ -167,7 +213,8 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
                 return EMPTY;
               }
 
-              const {urlWithoutParams, urlQueryParams} = splitUrlAndQueryParams(this.router.url);
+              const { urlWithoutParams, urlQueryParams } =
+                splitUrlAndQueryParams(this.router.url);
               const pathDefinition = this.activatedRoute.snapshot.pathFromRoot
                 .map((activatedRoute) => activatedRoute.routeConfig)
                 .filter((routeConfig) => !!routeConfig)
@@ -202,7 +249,8 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
           .pipe(
             takeUntil(this.ngUnsubscribe),
             switchMap((newValue) => {
-              const {urlWithoutParams, urlQueryParams} = splitUrlAndQueryParams(this.router.url);
+              const { urlWithoutParams, urlQueryParams } =
+                splitUrlAndQueryParams(this.router.url);
               if (!!newValue) {
                 urlQueryParams.set(
                   queryParam.name,
