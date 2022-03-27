@@ -14,6 +14,8 @@
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
+    "e2e-local:demo-book-list": "ng e2e demo-book-list-e2e --watch",
+    "e2e-local:demo-form": "ng e2e demo-form-e2e --watch",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",

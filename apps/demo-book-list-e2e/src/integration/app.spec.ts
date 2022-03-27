@@ -1,13 +1,28 @@
-import {getGreeting} from '../support/app.po';
+import {
+  getBookListRow,
+  getBookListExpandedRow,
+  getBookSearchField,
+} from '../support/app.po';
 
-describe('demo', () => {
-  beforeEach(() => cy.visit('/'));
+describe('book list demo', () => {
+  it('should open expand the row given by the deep link from url', () => {
+    cy.visit('library/berlin/books/1');
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    getBookListExpandedRow(1).should('be.visible');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to demo!');
+  it('should update the path param in the url on book selection', () => {
+    getBookListRow(2).click();
+    getBookListExpandedRow(2).should('be.visible');
+
+    cy.url().should('contain', '/books/2');
+  });
+
+  it('should update the query param in the url from search string', () => {
+    cy.url().should('not.contain', '?searchString');
+
+    getBookSearchField().type('Jones');
+
+    cy.url().should('contain', '?searchString=Jones');
   });
 });

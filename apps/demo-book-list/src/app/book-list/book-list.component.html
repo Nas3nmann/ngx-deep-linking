@@ -1,7 +1,7 @@
 <mat-toolbar>
   <mat-form-field>
     <mat-label>Search</mat-label>
-    <input [(ngModel)]="searchString" matInput/>
+    <input [(ngModel)]="searchString" matInput data-test="book-search-field"/>
   </mat-form-field>
 </mat-toolbar>
 <table [dataSource]="books"
@@ -30,9 +30,9 @@
   <tr (click)="selectedBook = selectedBook === element ? undefined : element"
       *matRowDef="let element; columns: columnsToDisplay"
       [class.example-expanded-row]="selectedBook === element"
-      class="example-element-row" mat-row>
+      class="example-element-row" mat-row data-test="book-list-row" data-id="{{element.id}}">
   </tr>
-  <tr *matRowDef="let row; columns: ['expandedContent']"
-      class="example-detail-row" mat-row>
+  <tr *matRowDef="let element; columns: ['expandedContent']"
+      class="example-detail-row" mat-row data-test="book-list-expanded-row" data-id="{{element.id}}">
   </tr>
 </table>
