@@ -31,8 +31,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "release:prepare": "",
-    "release:build": "npm run clean && nx affected:test --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking",
+    "release:build": "npm run clean && nx affected:test --all && nx affected:e2e --all && nx build ngx-deep-linking && npx copy README.md dist/libs/ngx-deep-linking",
     "release:publish": "cd dist\\libs\\ngx-deep-linking && npm publish --access=public",
     "prepare": "husky install"
   },
