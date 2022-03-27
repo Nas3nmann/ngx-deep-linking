@@ -21,7 +21,7 @@ jobs:
           node-version: '16'
       - run: yarn install --frozen-lockfile
       - run: npx nx affected --target=lint --parallel=3
-      - run: npx nx build demo-book-list --with-deps --prod --baseHref /demo-book-list/
+      - run: npx nx build demo-book-list --with-deps --prod --baseHref /ngx-deep-linking/
       - run: npx nx affected --target=test --parallel=2
       - run: npx nx affected --target=e2e --parallel=1
       - name: Deploy

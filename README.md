@@ -17,6 +17,8 @@ A library for :sparkles:automatic synchronization:sparkles: of angular component
 
 ![Demo booklist](https://raw.githubusercontent.com/Nas3nmann/ngx-input-deep-linking/main/apps/demo-book-list/src/assets/demo.gif)
 
+[Or view live demo on github pages](https://nas3nmann.github.io/ngx-deep-linking/)
+
 ![Demo form](https://raw.githubusercontent.com/Nas3nmann/ngx-input-deep-linking/main/apps/demo-form/src/assets/demo.gif)
 
 ## How to use
