@@ -3,7 +3,6 @@
 A library for :sparkles:automatic synchronization:sparkles: of angular component fields with url path and query params.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 ## Why?
 

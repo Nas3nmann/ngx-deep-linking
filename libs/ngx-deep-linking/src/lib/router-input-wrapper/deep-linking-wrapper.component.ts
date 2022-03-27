@@ -182,7 +182,7 @@ export class DeepLinkingWrapperComponent implements OnInit, OnDestroy {
     param: string
   ): string | number | Record<string, unknown> {
     if (param === undefined || param === null) {
-      return deepLinkingParam.type === 'json' ? {} : param;
+      return param;
     }
 
     switch (deepLinkingParam.type) {

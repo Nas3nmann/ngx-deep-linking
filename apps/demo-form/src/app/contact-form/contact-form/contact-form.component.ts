@@ -24,9 +24,10 @@ export class ContactFormComponent {
   }
 
   set formContent(newContent: FormContent) {
-    this.firstName.patchValue(newContent.firstName);
-    this.lastName.patchValue(newContent.lastName);
-    this.message.patchValue(newContent.message);
+    const newContentOrEmpty = newContent || {};
+    this.firstName.patchValue(newContentOrEmpty.firstName);
+    this.lastName.patchValue(newContentOrEmpty.lastName);
+    this.message.patchValue(newContentOrEmpty.message);
   }
 
   @Output()

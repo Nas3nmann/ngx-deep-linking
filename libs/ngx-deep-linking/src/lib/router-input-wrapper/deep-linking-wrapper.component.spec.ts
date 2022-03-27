@@ -195,12 +195,20 @@ describe('RouterInputWrapperComponent', () => {
     });
   });
 
-  it('should support json object deep linking', () => {
-    const complexObject = { key1: 'value', key2: 2 };
-    queryParamChanges.next({
-      complexQueryParam: '{"key1": "value", "key2": 2}',
+  describe('json object deep linking', () => {
+    it('should support json object deep linking', () => {
+      const complexObject = { key1: 'value', key2: 2 };
+      queryParamChanges.next({
+        complexQueryParam: '{"key1": "value", "key2": 2}',
+      });
+
+      expect(wrappedComponent.complexQueryParam).toStrictEqual(complexObject);
     });
 
-    expect(wrappedComponent.complexQueryParam).toStrictEqual(complexObject);
+    it('should set the component input to undefined if the url param is not defined', () => {
+      queryParamChanges.next({});
+
+      expect(wrappedComponent.complexQueryParam).toBeUndefined();
+    });
   });
 });
