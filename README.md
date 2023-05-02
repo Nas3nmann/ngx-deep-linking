@@ -1,3 +1,7 @@
+# ⚠️ discontinued 
+## The Angular team has finally implemented populating inputs from route parameters (https://github.com/angular/angular/pull/49633)
+--------
+
 # :rocket: ngx-deep-linking
 
 A library for :sparkles:automatic synchronization:sparkles: of angular component fields with url path and query params.
